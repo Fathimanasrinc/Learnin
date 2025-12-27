@@ -5,12 +5,13 @@ import ProfileCards from '../ProfileCards/ProfileCards'
 
 
 function Home() {
+   
 
   return (
     <div>
       <Navbar/>
       <Sidebar/>
-      <ProfileCards/>
+    <ProfileCards/>
     </div>
   )
 }

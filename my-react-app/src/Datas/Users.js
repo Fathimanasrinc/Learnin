@@ -1,4 +1,4 @@
-const Users = [
+const users = [
   {
     id: 1,
     name: "Aisha Rahman",
@@ -9,7 +9,8 @@ const Users = [
       location: "Kochi, India",
       hobbies: ["design", "coding", "reading"],
     },
-    starCount: 4.8
+    starCount: 4.8,
+    skills: ["HTML", "CSS", "JavaScript", "React", "Responsive Design", "Git"]
   },
   {
     id: 2,
@@ -21,7 +22,8 @@ const Users = [
       location: "Mumbai, India",
       hobbies: ["music", "gaming", "tech blogs"],
     },
-    starCount: 4.5
+    starCount: 4.5,
+    skills: ["JavaScript", "React", "Redux", "Node.js", "REST APIs", "Git"]
   },
   {
     id: 3,
@@ -33,7 +35,8 @@ const Users = [
       location: "Bangalore, India",
       hobbies: ["AI", "baking", "traveling"],
     },
-    starCount: 4.9
+    starCount: 4.9,
+    skills: ["Python", "JavaScript", "React", "Data Analysis", "Machine Learning"]
   },
   {
     id: 4,
@@ -45,7 +48,8 @@ const Users = [
       location: "Hyderabad, India",
       hobbies: ["cloud", "cricket", "movies"],
     },
-    starCount: 4.3
+    starCount: 4.3,
+    skills: ["Git", "Docker", "CI/CD", "Node.js", "React", "Cloud Computing"]
   },
   {
     id: 5,
@@ -57,8 +61,9 @@ const Users = [
       location: "Chennai, India",
       hobbies: ["photography", "sketching", "hiking"],
     },
-    starCount: 4.7
+    starCount: 4.7,
+    skills: ["HTML", "CSS", "UX Design", "React", "User Research"]
   }
 ];
 
-export default Users;
+export default users;
