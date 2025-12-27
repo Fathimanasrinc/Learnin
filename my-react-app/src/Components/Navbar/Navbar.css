@@ -8,6 +8,7 @@
   align-items: center;
   position: relative;
   margin: 0%;
+  z-index: 1;
 }
 .nav-items {
   width: 50px;
