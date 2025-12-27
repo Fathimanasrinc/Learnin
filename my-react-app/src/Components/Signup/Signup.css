@@ -1,10 +1,9 @@
-* {
+
+
+.signup-container {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #d3d6db;
-}
-
-.signup-container {
   height: 100vh;
   display: flex;
   justify-content: center;

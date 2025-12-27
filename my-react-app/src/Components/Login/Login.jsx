@@ -35,7 +35,7 @@ const Login = () => {
         />
 
         <button type="submit" className="login-button">
-          Sign In hello
+          Sign In 
         </button>
       </form>
     </div>

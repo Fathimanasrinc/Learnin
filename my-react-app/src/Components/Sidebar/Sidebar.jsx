@@ -1,8 +1,8 @@
 import React from "react";
 import "./Sidebar.css";
-import credit from "../assets/credit2.png";
-import task from "../assets/task.jpeg";
-import requests from "../assets/requests.png";
+import credit from "../../assets/credit2.png";
+import task from "../../assets/task.jpeg";
+import requests from "../../assets/requests.png";
 const Sidebar = () => {
   return (
     <div className="sidebar">
