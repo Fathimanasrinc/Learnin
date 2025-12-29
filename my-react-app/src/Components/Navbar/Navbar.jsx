@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/LOGO.png";
 import blank from "../../assets/blank.png";
-import notify from "../../assets/notify.svg";
-import searchIcon from "../../assets/search-solid.svg";
 import "./Navbar.css";
 
 function Navbar() {
@@ -16,10 +14,9 @@ function Navbar() {
         </div>
         <div className='search-bar'>
             <input className='search-input' type="text" placeholder='Search skills' />
-            <button className='search-icon'><FontAwesomeIcon icon={faSearch}  /></button>
+            <button className='search-icon'><FontAwesomeIcon icon={faSearch} size="lg" /></button>
         </div>
         <div className='right-side'>
-            <img className='nav-items' src={notify}/>
             <img className="profile-pic nav-items"  src={blank} alt="" />
         </div>
         

@@ -5,10 +5,26 @@ const ProfilePage = () => {
   const [showReviews, setShowReviews] = useState(false);
 
   const rating = 4;
+
   const reviews = [
-    "Excellent work quality.",
-    "Very responsive and professional.",
-    "Would definitely hire again."
+    {
+      name: "Alice Smith",
+      image:
+        "https://randomuser.me/api/portraits/women/44.jpg",
+      comment: "Excellent work quality and attention to detail."
+    },
+    {
+      name: "Mark Johnson",
+      image:
+        "https://randomuser.me/api/portraits/men/32.jpg",
+      comment: "Very responsive and professional."
+    },
+    {
+      name: "Sophia Lee",
+      image:
+        "https://randomuser.me/api/portraits/women/68.jpg",
+      comment: "Would definitely hire again!"
+    }
   ];
 
   const skills = ["React", "JavaScript", "CSS", "UI Design"];
@@ -21,7 +37,7 @@ const ProfilePage = () => {
           <img
             src="https://images.unsplash.com/photo-1527980965255-d3b416303d12"
             alt="Profile"
-            className="profile-image"
+            className="profile-pic-image"
           />
           <span className="credits">90</span>
         </div>
@@ -50,10 +66,21 @@ const ProfilePage = () => {
           {showReviews ? "Hide Reviews" : "View Reviews"}
         </button>
 
+        {/* REVIEWS WITH PROFILE */}
         {showReviews && (
           <div className="reviews">
-            {reviews.map((r, i) => (
-              <p key={i}>"{r}"</p>
+            {reviews.map((review, index) => (
+              <div key={index} className="review-card">
+                <img
+                  src={review.image}
+                  alt={review.name}
+                  className="reviewer-img"
+                />
+                <div className="review-content">
+                  <strong>{review.name}</strong>
+                  <p>{review.comment}</p>
+                </div>
+              </div>
             ))}
           </div>
         )}
@@ -83,6 +110,8 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+
 
 
 
