@@ -8,6 +8,7 @@ import TasksPage from "./Components/TasksPage/TasksPage.jsx";
 import Navbar from "./Components/Navbar/Navbar.jsx";
 import Sidebar from "./Components/Sidebar/Sidebar.jsx";
 import ProfilePage from "./Components/ProfilePage/ProfilePage.jsx";
+import Myprofilepage from "./Components/Mypage/Myprofilepage.jsx"
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile" element={<Myprofilepage />} />
         <Route path="/task" element={<TasksPage />} />
       </Routes>
     </>

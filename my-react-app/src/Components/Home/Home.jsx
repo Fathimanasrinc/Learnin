@@ -7,7 +7,7 @@ function Home() {
    
   return (
     <>
-       <Login />
+       <ProfileCards/>
     </>
   )
 }
