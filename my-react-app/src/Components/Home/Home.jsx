@@ -13,9 +13,7 @@ function Home() {
 
   return (
     <div>
-      <Navbar/>
-      <Sidebar/>
-    <AcceptBox/>
+       <ProfileCards />
     </div>
   )
 }

@@ -14,7 +14,7 @@ const ProfilePage = () => {
       {/* LEFT SIDE */}
       <div className="left-section">
         <div className="image-wrapper">
-          <img src={profileImage} alt="Profile" className="profile-image" />
+          <img src={profileImage} alt="Profile" className="profile-page-image" />
           <div className="credit-circle">
             <span>120</span>
             <small>Credits</small>

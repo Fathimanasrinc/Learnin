@@ -1,14 +1,31 @@
 import { useState } from 'react'
 import './App.css'
 import Home from './Components/Home/Home.jsx'
-import Login from './Components/Login/Login.jsx'
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import Login from './Components/Login/Login.jsx';
+import Signup from"../src/Components/Signup/Signup.jsx";
+import ProfilePage from './Components/ProfilePage/ProfilePage.jsx';
+import TasksPage from './Components/TasksPage/TasksPage.jsx';
+import Navbar from './Components/Navbar/Navbar.jsx';
+import Sidebar from './Components/Sidebar/Sidebar.jsx';
+
 
 
 function App() {
 
   return (
     <>
-    <Home/>
+     <BrowserRouter>
+     <Navbar/>
+     <Sidebar/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/task" element={<TasksPage />} />
+      </Routes>
+    </BrowserRouter>
      
     </>
   )
