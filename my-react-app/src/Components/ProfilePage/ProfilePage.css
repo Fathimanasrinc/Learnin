@@ -1,98 +1,108 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background: #f3f3f3;
+  background: #f2f2f2;
   font-family: Arial, sans-serif;
 }
 
 /* MAIN CONTAINER */
 .profile-container {
-  max-width: 900px;
+  width: 900px;
   margin: 40px auto;
-  background: white;
-  display: flex;
+  background: #ffffff;
+  border-radius: 12px;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 40px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
 }
 
 /* LEFT SECTION */
 .left-section {
-  width: 35%;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* PROFILE IMAGE */
+/* IMAGE */
 .image-wrapper {
   position: relative;
-  width: 160px;
-  height: 160px;
-  margin: 0 auto 15px;
+  margin-bottom: 15px;
 }
 
 .profile-image {
-  width: 100%;
-  height: 100%;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #e0e0e0;
 }
 
-/* CREDIT CIRCLE */
-.credit-circle {
+.credits {
   position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 55px;
-  height: 55px;
-  background: white;
+  top: 8px;
+  right: 8px;
+  width: 42px;
+  height: 42px;
+  background: #555;
+  color: white;
   border-radius: 50%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  font-size: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.credit-circle span {
-  font-weight: bold;
+  justify-content: center;
   font-size: 14px;
 }
 
-/* NAME & STARS */
-.name {
-  margin-bottom: 8px;
+/* NAME */
+.username {
+  margin: 8px 0;
 }
 
-.stars {
+/* STARS */
+.rating {
   display: flex;
-  justify-content: center;
+  gap: 5px;
   margin-bottom: 15px;
 }
 
 .star {
   width: 22px;
-  margin: 0 3px;
-  opacity: 0.3;
 }
 
-.star.active {
-  opacity: 1;
-}
-
-/* BUTTONS */
+/* REVIEWS */
 .review-btn {
-  background: #555;
-  color: white;
+  padding: 8px 18px;
+  background: #e4e4e4;
   border: none;
-  padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.reviews {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.reviews p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
 }
 
 /* RIGHT SECTION */
 .right-section {
-  width: 65%;
-  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* TOP CONTENT */
+.top-content h3 {
+  margin-bottom: 6px;
 }
 
 .bio {
@@ -100,26 +110,31 @@ body {
   margin-bottom: 20px;
 }
 
+/* SKILLS */
 .skills {
   list-style: none;
   padding: 0;
-  margin-bottom: 25px;
 }
 
 .skills li {
-  display: inline-block;
-  background: #ededed;
-  padding: 6px 10px;
-  border-radius: 5px;
-  margin-right: 6px;
-  margin-bottom: 6px;
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 14px;
 }
 
+/* MESSAGE BUTTON */
 .message-btn {
-  background: #222;
+  align-self: flex-end;
+  padding: 10px 26px;
+  background: #555;
   color: white;
   border: none;
-  padding: 10px 22px;
   border-radius: 6px;
   cursor: pointer;
 }
+
+
+
+
