@@ -4,25 +4,24 @@ import "./ProfilePage.css";
 const ProfilePage = () => {
   const [showReviews, setShowReviews] = useState(false);
 
+  const profileImage = "https://randomuser.me/api/portraits/men/75.jpg"; // default image
+
   const rating = 4;
 
   const reviews = [
     {
       name: "Alice Smith",
-      image:
-        "https://randomuser.me/api/portraits/women/44.jpg",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
       comment: "Excellent work quality and attention to detail."
     },
     {
       name: "Mark Johnson",
-      image:
-        "https://randomuser.me/api/portraits/men/32.jpg",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
       comment: "Very responsive and professional."
     },
     {
       name: "Sophia Lee",
-      image:
-        "https://randomuser.me/api/portraits/women/68.jpg",
+      image: "https://randomuser.me/api/portraits/women/68.jpg",
       comment: "Would definitely hire again!"
     }
   ];
@@ -34,7 +33,11 @@ const ProfilePage = () => {
       {/* LEFT SECTION */}
       <div className="left-section">
         <div className="image-wrapper">
-          <img src={profileImage} alt="Profile" className="profile-page-image" />
+          <img 
+            src={profileImage} 
+            alt="Profile" 
+            className="profile-page-image" 
+          />
           <div className="credit-circle">
             <span>120</span>
             <small>Credits</small>
@@ -65,7 +68,6 @@ const ProfilePage = () => {
           {showReviews ? "Hide Reviews" : "View Reviews"}
         </button>
 
-        {/* REVIEWS WITH PROFILE */}
         {showReviews && (
           <div className="reviews">
             {reviews.map((review, index) => (
@@ -96,8 +98,8 @@ const ProfilePage = () => {
 
           <h3>Skills</h3>
           <ul className="skills">
-            {skills.map((skill, i) => (
-              <li key={i}>{skill}</li>
+            {skills.map((skill, index) => (
+              <li key={index}>{skill}</li>
             ))}
           </ul>
         </div>
@@ -109,9 +111,6 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-
-
-
 
 
 

@@ -1,14 +1,14 @@
 
+import Login from '../Login/Login'
 import ProfileCards from '../ProfileCards/ProfileCards'
 
 
 function Home() {
    
-
   return (
-    <div>
-       <ProfileCards />
-    </div>
+    <>
+       <Login />
+    </>
   )
 }
 

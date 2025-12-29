@@ -1,23 +1,22 @@
-import { useState } from 'react'
-import './App.css'
-import Home from './Components/Home/Home.jsx'
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import Login from './Components/Login/Login.jsx';
-import Signup from"../src/Components/Signup/Signup.jsx";
-import TasksPage from './Components/TasksPage/TasksPage.jsx';
-import Navbar from './Components/Navbar/Navbar.jsx';
-import Sidebar from './Components/Sidebar/Sidebar.jsx';
-import ProfilePage from './Components/ProfilePage/ProfilePage.jsx';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
 
-
+import Home from "./Components/Home/Home.jsx";
+import Login from "./Components/Login/Login.jsx";
+import Signup from "./Components/Signup/Signup.jsx";
+import TasksPage from "./Components/TasksPage/TasksPage.jsx";
+import Navbar from "./Components/Navbar/Navbar.jsx";
+import Sidebar from "./Components/Sidebar/Sidebar.jsx";
+import ProfilePage from "./Components/ProfilePage/ProfilePage.jsx";
 
 function App() {
-
   return (
     <>
-     <BrowserRouter>
-     <Navbar/>
-     <Sidebar/>
+      {/* Global Navbar + Sidebar */}
+      <Navbar />
+      <Sidebar />
+
+      {/* Page content changes here */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Login />} />
@@ -25,10 +24,8 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/task" element={<TasksPage />} />
       </Routes>
-    </BrowserRouter>
-     
     </>
-  )
+  );
 }
 
-export default App
+export default App;
