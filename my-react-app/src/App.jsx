@@ -4,10 +4,10 @@ import Home from './Components/Home/Home.jsx'
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Login from './Components/Login/Login.jsx';
 import Signup from"../src/Components/Signup/Signup.jsx";
-import ProfilePage from './Components/ProfilePage/ProfilePage.jsx';
 import TasksPage from './Components/TasksPage/TasksPage.jsx';
 import Navbar from './Components/Navbar/Navbar.jsx';
 import Sidebar from './Components/Sidebar/Sidebar.jsx';
+import ProfilePage from './Components/ProfilePage/ProfilePage.jsx';
 
 
 

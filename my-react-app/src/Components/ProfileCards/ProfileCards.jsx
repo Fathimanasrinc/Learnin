@@ -15,7 +15,7 @@ export default function ProfileCards() {
     <div className="card-grid">
       {users.map((user) => {
         return (
-          <Card variant="outlined" sx={{ maxWidth: 360,marginLeft:1 , marginRight:1,minWidth:200,marginBottom:1,marginTop:1 }}>
+          <Card key={user.id} variant="outlined" sx={{ maxWidth: 360,marginLeft:1 , marginRight:1,minWidth:200,marginBottom:1,marginTop:1 }}>
             <Box sx={{ p: 2 }}>
               <Stack
                 direction="row"

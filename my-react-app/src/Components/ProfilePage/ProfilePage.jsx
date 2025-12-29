@@ -1,17 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProfilePage.css";
 
 const ProfilePage = () => {
+  const [showReviews, setShowReviews] = useState(false);
+
   const rating = 4;
 
-  const profileImage =
-    "https://images.unsplash.com/photo-1502685104226-ee32379fefbe";
-  const starImage =
-    "https://cdn-icons-png.flaticon.com/512/1828/1828884.png";
+  const reviews = [
+    {
+      name: "Alice Smith",
+      image:
+        "https://randomuser.me/api/portraits/women/44.jpg",
+      comment: "Excellent work quality and attention to detail."
+    },
+    {
+      name: "Mark Johnson",
+      image:
+        "https://randomuser.me/api/portraits/men/32.jpg",
+      comment: "Very responsive and professional."
+    },
+    {
+      name: "Sophia Lee",
+      image:
+        "https://randomuser.me/api/portraits/women/68.jpg",
+      comment: "Would definitely hire again!"
+    }
+  ];
+
+  const skills = ["React", "JavaScript", "CSS", "UI Design"];
 
   return (
     <div className="profile-container">
-      {/* LEFT SIDE */}
+      {/* LEFT SECTION */}
       <div className="left-section">
         <div className="image-wrapper">
           <img src={profileImage} alt="Profile" className="profile-page-image" />
@@ -21,37 +41,66 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        <h2 className="name">John Doe</h2>
+        <h2 className="username">John Doe</h2>
 
-        <div className="stars">
+        <div className="rating">
           {[...Array(5)].map((_, i) => (
             <img
               key={i}
-              src={starImage}
+              className="star"
+              src={
+                i < rating
+                  ? "https://cdn-icons-png.flaticon.com/512/616/616489.png"
+                  : "https://cdn-icons-png.flaticon.com/512/616/616490.png"
+              }
               alt="star"
-              className={i < rating ? "star active" : "star"}
             />
           ))}
         </div>
 
-        <button className="review-btn">Review</button>
+        <button
+          className="review-btn"
+          onClick={() => setShowReviews(!showReviews)}
+        >
+          {showReviews ? "Hide Reviews" : "View Reviews"}
+        </button>
+
+        {/* REVIEWS WITH PROFILE */}
+        {showReviews && (
+          <div className="reviews">
+            {reviews.map((review, index) => (
+              <div key={index} className="review-card">
+                <img
+                  src={review.image}
+                  alt={review.name}
+                  className="reviewer-img"
+                />
+                <div className="review-content">
+                  <strong>{review.name}</strong>
+                  <p>{review.comment}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* RIGHT SIDE */}
+      {/* RIGHT SECTION */}
       <div className="right-section">
-        <h3>Bio</h3>
-        <p className="bio">
-          Frontend developer passionate about creating modern and clean user
-          interfaces with React.
-        </p>
+        <div className="top-content">
+          <h3>Bio</h3>
+          <p className="bio">
+            Frontend developer focused on clean UI, React architecture,
+            and scalable design systems.
+          </p>
 
-        <h3>Skills</h3>
-        <ul className="skills">
-          <li>React</li>
-          <li>JavaScript</li>
-          <li>CSS</li>
-          <li>UI Design</li>
-        </ul>
+          <h3>Skills</h3>
+          <ul className="skills">
+            {skills.map((skill, i) => (
+              <li key={i}>{skill}</li>
+            ))}
+          </ul>
+        </div>
 
         <button className="message-btn">Message</button>
       </div>
@@ -60,3 +109,9 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+
+
+
+
+
