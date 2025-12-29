@@ -1,10 +1,6 @@
-.card-grid{
-    margin-left: 220px;
-    display: flex;
-}
-.card{
-    width: 200px;
-    height: 300px;
-    background-color: #d3d6db;
-    margin: 1%;
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-left: 220px;
+  margin-top: 60px;
 }
