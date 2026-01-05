@@ -1,0 +1,72 @@
+/* ChatBox container */
+.chatbox-container {
+  width: 400px;
+  max-width: 90%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header */
+.chatbox-header {
+  padding: 15px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Messages container */
+.chatbox-messages {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+/* Individual message bubbles */
+.chatbox-message {
+  max-width: 75%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.chatbox-message.me {
+  align-self: flex-end;
+  background-color: #007bff;
+  color: #fff;
+  border-bottom-right-radius: 0;
+}
+
+.chatbox-message.other {
+  align-self: flex-start;
+  background-color: #e0e0e0;
+  color: #333;
+  border-bottom-left-radius: 0;
+}
+
+/* Scrollbar styling */
+.chatbox-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatbox-messages::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+.chatbox-messages::-webkit-scrollbar-track {
+  background-color: #f9f9f9;
+}

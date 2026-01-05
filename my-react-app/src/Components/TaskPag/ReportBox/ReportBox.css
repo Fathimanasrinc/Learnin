@@ -1,0 +1,59 @@
+/* ReportForm.css */
+
+.report-card {
+  max-width: 420px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.report-title {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.report-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+.report-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.report-textarea:focus {
+  border-color: #2563eb;
+}
+
+.report-button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.report-button:hover {
+  background-color: #1e40af;
+}

@@ -1,32 +1,40 @@
-import React, { useState } from "react";
+
 import "./ProfilePage.css";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const ProfilePage = () => {
   const [showReviews, setShowReviews] = useState(false);
+ 
+  const { id } = useParams(); // get ID from URL
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+ 
 
   const profileImage = "https://randomuser.me/api/portraits/men/75.jpg"; // default image
 
-  const rating = 4;
+  
 
-  const reviews = [
-    {
-      name: "Alice Smith",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-      comment: "Excellent work quality and attention to detail."
-    },
-    {
-      name: "Mark Johnson",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      comment: "Very responsive and professional."
-    },
-    {
-      name: "Sophia Lee",
-      image: "https://randomuser.me/api/portraits/women/68.jpg",
-      comment: "Would definitely hire again!"
-    }
-  ];
+ useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:5000/api/users/${id}`
+        );
+        setUser(data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
 
-  const skills = ["React", "JavaScript", "CSS", "UI Design"];
+    fetchUser();
+  }, [id]);
+
+  if (loading) return <p>Loading...</p>;
+  if (!user) return <p>User not found</p>;
 
   return (
     <div className="profile-container">
@@ -34,17 +42,17 @@ const ProfilePage = () => {
       <div className="left-section">
         <div className="image-wrapper">
           <img 
-            src={profileImage} 
+             src={user.image || profileImage} 
             alt="Profile" 
             className="profile-page-image" 
           />
           <div className="credit-circle">
-            <span>120</span>
+            <span>{user.credit}</span>
             <small>Credits</small>
           </div>
         </div>
 
-        <h2 className="username">John Doe</h2>
+        <h2 className="username">{user.name}</h2>
 
         <div className="rating">
           {[...Array(5)].map((_, i) => (
@@ -52,7 +60,7 @@ const ProfilePage = () => {
               key={i}
               className="star"
               src={
-                i < rating
+                i < user.rating
                   ? "https://cdn-icons-png.flaticon.com/512/616/616489.png"
                   : "https://cdn-icons-png.flaticon.com/512/616/616490.png"
               }
@@ -61,30 +69,8 @@ const ProfilePage = () => {
           ))}
         </div>
 
-        <button
-          className="review-btn"
-          onClick={() => setShowReviews(!showReviews)}
-        >
-          {showReviews ? "Hide Reviews" : "View Reviews"}
-        </button>
 
-        {showReviews && (
-          <div className="reviews">
-            {reviews.map((review, index) => (
-              <div key={index} className="review-card">
-                <img
-                  src={review.image}
-                  alt={review.name}
-                  className="reviewer-img"
-                />
-                <div className="review-content">
-                  <strong>{review.name}</strong>
-                  <p>{review.comment}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+       
       </div>
 
       {/* RIGHT SECTION */}
@@ -92,16 +78,17 @@ const ProfilePage = () => {
         <div className="top-content">
           <h3>Bio</h3>
           <p className="bio">
-            Frontend developer focused on clean UI, React architecture,
-            and scalable design systems.
+           {user.bio}
           </p>
 
           <h3>Skills</h3>
-          <ul className="skills">
-            {skills.map((skill, index) => (
-              <li key={index}>{skill}</li>
-            ))}
-          </ul>
+          <div className="skills">
+                {user.skills?.slice(0, 2).map((skill, index) => (
+                  <span className="skill-pill" key={index}>
+                    {skill}
+                  </span>
+                ))}
+              </div>
         </div>
 
         <button className="message-btn">Message</button>

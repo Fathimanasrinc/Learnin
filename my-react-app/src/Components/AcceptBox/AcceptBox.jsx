@@ -1,22 +1,41 @@
-import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const AcceptBox= () => {
-  const [request] = useState({
-    skills: "React, JavaScript, Git",
-    description:
-      "Looking for guidance to build a complete React project and understand best practices.",
-    deadline: "2025-02-15",
-    credits: 30,
-  });
+const AcceptBox= ({ request,onClose}) => {
+  const token = localStorage.getItem("token");
+    console.log("TOKEN:", token);
+    const acceptRequest = async (requestId) => {
+  try {
+    await axios.put(
+      `http://localhost:5000/api/requests/accept/${requestId}`,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
 
-  const handleAccept = () => {
-    alert("You have ACCEPTED this mentorship request ✅");
-  };
-
-  const handleDecline = () => {
-    alert("You have DECLINED this mentorship request ❌");
-  };
-
+    // Update UI
+   
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    alert("Failed to accept request");
+  }
+  onClose();
+};
+const handleDelete = async (requestId) => {
+  try {
+    await axios.delete(
+      `http://localhost:5000/api/requests/${requestId}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    alert("Failed to delete request");
+  }
+  onClose();
+};
+ 
+console.log({request},"myrequest")
+  if (!request) return <p>Loading...</p>;
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>Mentorship Request</h2>
@@ -28,7 +47,8 @@ const AcceptBox= () => {
 
       <div style={styles.field}>
         <label style={styles.label}>Expectation / Description</label>
-        <p style={styles.value}>{request.description}</p>
+        <p style={styles.value}>{request.
+expectations}</p>
       </div>
 
       <div style={styles.field}>
@@ -40,15 +60,9 @@ const AcceptBox= () => {
         <label style={styles.label}>Credits Offered</label>
         <p style={styles.value}>{request.credits} Credits</p>
       </div>
-
-      <div style={styles.buttonGroup}>
-        <button style={styles.acceptBtn} onClick={handleAccept}>
-          Accept
-        </button>
-        <button style={styles.declineBtn} onClick={handleDecline}>
-          Decline
-        </button>
-      </div>
+<button className="accept-btn" onClick={() => acceptRequest(request._id)}>Accept</button>
+ <button className="decline-btn" onClick={() => handleDelete(request._id)}>Decline</button>
+     
     </div>
   );
 };

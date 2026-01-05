@@ -1,0 +1,146 @@
+/* Container */
+.admin-reports-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: "Inter", system-ui, sans-serif;
+  background-color: #f5f5f5; /* light gray background */
+  overflow-x: hidden; /* Fix horizontal overflow */
+}
+
+.admin-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111; /* black text */
+  margin-bottom: 30px;
+}
+
+.empty-text {
+  text-align: center;
+  color: #6b7280; /* gray text */
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+/* Reports Grid */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* responsive */
+  gap: 20px;
+}
+
+/* Individual Report Card */
+.report-card {
+  background-color: #fff; /* white card */
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  word-wrap: break-word;
+}
+
+.report-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Report Section */
+.report-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.report-section .label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280; /* gray label */
+}
+
+.report-section .value {
+  font-size: 15px;
+  color: #111; /* black text */
+}
+
+.report-section .description {
+  background-color: #f3f4f6; /* gray box */
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db; /* light gray border */
+  font-size: 14px;
+  color: #111;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+/* Buttons Container */
+.report-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+/* Buttons */
+.update-btn,
+.chat-btn,
+.delete-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* Update Button */
+.update-btn {
+  background-color: #374151; /* dark gray */
+  color: #fff;
+}
+
+.update-btn:hover {
+  background-color: #1f2937;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Chat Button */
+.chat-btn {
+  background-color: #e5e7eb; /* light gray */
+  color: #111; /* black text */
+}
+
+.chat-btn:hover {
+  background-color: #d1d5db;
+  transform: translateY(-2px);
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #ef4444; /* red */
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #b91c1c;
+  transform: translateY(-2px);
+}
+
+/* Responsive Buttons */
+@media (max-width: 640px) {
+  .report-buttons {
+    flex-direction: column;
+  }
+  .update-btn,
+  .chat-btn,
+  .delete-btn {
+    width: 100%;
+  }
+}

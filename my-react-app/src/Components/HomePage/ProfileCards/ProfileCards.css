@@ -1,0 +1,145 @@
+/* Grid */
+.card-grid {
+
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 6px;
+  margin: 100px 0px 0px 250px;
+}
+
+/* Card */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px;
+  height: 155px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Content */
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Left */
+.user-left {
+  width: 80px;
+  text-align: center;
+}
+
+/* Avatar */
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d1d1d1, #f0f0f0);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Name */
+.username {
+  margin: 6px 0 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Rating */
+.rating {
+  margin-top: 2px;
+}
+
+.star {
+  font-size: 12px;
+  color: #d0d0d0;
+}
+
+.star.filled {
+  color: #f5b301;
+}
+
+/* Right */
+.user-right {
+  flex: 1;
+}
+
+/* Skills */
+.skills {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skill-pill {
+  font-size: 10px;
+  padding: 3px 8px;
+  background: #f3f4f6;
+  border-radius: 999px;
+  color: #444;
+  white-space: nowrap;
+}
+
+/* Bottom */
+.card-bottom {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  flex: 1;
+  height: 28px;
+  font-size: 11px;
+  border: none;
+  border-radius: 8px;
+  background: #f3f3f3;
+  cursor: pointer;
+}
+
+.action-btn.primary {
+  background: #222;
+  color: #fff;
+}
+
+.action-btn:hover {
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}

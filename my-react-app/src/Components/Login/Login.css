@@ -55,3 +55,21 @@
   background-color:#d3d6db;
 }
 
+.login-footer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.signup-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.signup-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}

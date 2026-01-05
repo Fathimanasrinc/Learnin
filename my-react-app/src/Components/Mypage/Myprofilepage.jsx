@@ -1,32 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Myprofilepage.css";
 
 const Myprofilepage = () => {
   const [editMode, setEditMode] = useState(false);
   const [newSkill, setNewSkill] = useState("");
 
-  const [profile, setProfile] = useState({
-    image:
-      "https://images.unsplash.com/photo-1527980965255-d3b416303d12",
-    credits: 90,
-    name: "John Doe",
-    rating: 4,
-    bio:
-      "Frontend developer focused on clean UI, React architecture, and scalable design systems.",
-    skills: ["React", "JavaScript", "CSS", "UI Design"]
-  });
+  const DEFAULT_PROFILE_IMAGE =
+  "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+  const [profile, setProfile] = useState("");
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch("http://localhost:5000/api/myprofile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+      setProfile(data);
+    };
+
+    fetchProfile();
+  }, []);
 
   const reviews = [
     {
       name: "Alice Smith",
       image: "https://randomuser.me/api/portraits/women/44.jpg",
-      comment: "Excellent work quality and attention to detail."
+      comment: "Excellent work quality and attention to detail.",
     },
     {
       name: "Mark Johnson",
       image: "https://randomuser.me/api/portraits/men/32.jpg",
-      comment: "Very responsive and professional."
-    }
+      comment: "Very responsive and professional.",
+    },
   ];
 
   const handleSkillChange = (index, value) => {
@@ -38,7 +47,7 @@ const Myprofilepage = () => {
   const deleteSkill = (index) => {
     setProfile({
       ...profile,
-      skills: profile.skills.filter((_, i) => i !== index)
+      skills: profile.skills.filter((_, i) => i !== index),
     });
   };
 
@@ -46,37 +55,54 @@ const Myprofilepage = () => {
     if (!newSkill.trim()) return;
     setProfile({
       ...profile,
-      skills: [...profile.skills, newSkill]
+      skills: [...profile.skills, newSkill],
     });
     setNewSkill("");
   };
+  const saveProfile = async () => {
+    const token = localStorage.getItem("token");
 
+    const res = await fetch("http://localhost:5000/api/myprofile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(profile),
+    });
+
+    const data = await res.json();
+    setProfile(data);
+    console.log(data);
+    alert("Profile updated successfully");
+  };
+
+  if (!profile) {
+    return <div className="profile-container">Loading profile...</div>;
+  }
   return (
     <div className="profile-container">
       {/* LEFT SECTION */}
       <div className="left-section">
         <button
           className="edit-toggle"
-          onClick={() => setEditMode(!editMode)}
+          type="button"
+          onClick={async () => {
+            if (editMode) {
+              await saveProfile();
+            }
+            setEditMode(!editMode);
+          }}
         >
           {editMode ? "Save" : "Edit Profile"}
         </button>
 
         <div className="image-wrapper">
-          <img src={profile.image} alt="Profile" className="profile-image" />
+          <img src={profile.image || DEFAULT_PROFILE_IMAGE}  alt="Profile" className="profile-image" />
           <span className="credits">
-            {editMode ? (
-              <input
-                type="number"
-                value={profile.credits}
-                onChange={(e) =>
-                  setProfile({ ...profile, credits: e.target.value })
-                }
-                className="credit-input"
-              />
-            ) : (
-              profile.credits
-            )}
+             
+              {profile.credits}
+            
           </span>
         </div>
 
@@ -85,9 +111,7 @@ const Myprofilepage = () => {
             className="input-field"
             value={profile.image}
             placeholder="Profile image URL"
-            onChange={(e) =>
-              setProfile({ ...profile, image: e.target.value })
-            }
+            onChange={(e) => setProfile({ ...profile, image: e.target.value })}
           />
         )}
 
@@ -95,9 +119,7 @@ const Myprofilepage = () => {
           <input
             className="input-field"
             value={profile.name}
-            onChange={(e) =>
-              setProfile({ ...profile, name: e.target.value })
-            }
+            onChange={(e) => setProfile({ ...profile, name: e.target.value })}
           />
         ) : (
           <h2 className="username">{profile.name}</h2>
@@ -147,9 +169,7 @@ const Myprofilepage = () => {
             <textarea
               className="textarea"
               value={profile.bio}
-              onChange={(e) =>
-                setProfile({ ...profile, bio: e.target.value })
-              }
+              onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
             />
           ) : (
             <p className="bio">{profile.bio}</p>
@@ -163,9 +183,7 @@ const Myprofilepage = () => {
                   <>
                     <input
                       value={skill}
-                      onChange={(e) =>
-                        handleSkillChange(i, e.target.value)
-                      }
+                      onChange={(e) => handleSkillChange(i, e.target.value)}
                       className="skill-input"
                     />
                     <button
@@ -205,4 +223,3 @@ const Myprofilepage = () => {
 };
 
 export default Myprofilepage;
-

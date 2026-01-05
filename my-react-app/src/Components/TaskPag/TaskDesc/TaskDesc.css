@@ -1,0 +1,15 @@
+.report-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid #f87171;
+  color: #f87171;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.report-btn:hover {
+  background: #f87171;
+  color: #fff;
+}

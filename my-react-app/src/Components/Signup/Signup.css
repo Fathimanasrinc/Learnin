@@ -54,3 +54,21 @@
 .signup-button:hover {
   background-color: #333;
 }
+.signup-footer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.signin-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.signin-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}

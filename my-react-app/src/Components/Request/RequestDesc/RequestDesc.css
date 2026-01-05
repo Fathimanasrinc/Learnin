@@ -1,0 +1,16 @@
+ 
+.stars-review-box {
+  display: flex;
+  gap: 6px;
+}
+
+.star-review-box {
+  font-size: 32px;
+  cursor: pointer;
+  color: #555;
+  user-select: none;      /* prevents text selection */
+}
+
+.star.active-review-box {
+  color: gold;
+}

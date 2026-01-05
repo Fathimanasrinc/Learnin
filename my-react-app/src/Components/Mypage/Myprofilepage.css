@@ -1,15 +1,8 @@
-* {
-  box-sizing: border-box;
-}
 
-body {
-  background: #f2f2f2;
-  font-family: Arial, sans-serif;
-}
 
 .profile-container {
-  width: 900px;
-  margin: 40px auto;
+  width: 1000px;
+  margin: 50px 220px;
   background: #fff;
   border-radius: 12px;
   padding: 30px;
@@ -185,4 +178,3 @@ body {
   border-radius: 6px;
   cursor: pointer;
 }
-

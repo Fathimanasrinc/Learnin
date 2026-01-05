@@ -1,6 +1,0 @@
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin-left: 220px;
-  margin-top: 60px;
-}

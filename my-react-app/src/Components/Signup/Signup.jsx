@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Signup.css";
+import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -8,12 +9,13 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -21,7 +23,29 @@ const Signup = () => {
       return;
     }
 
-    console.log("Signup Data:", formData);
+    try {
+      const response = await fetch("http://localhost:5000/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate("/make");
+      } else {
+        alert(data.message || "Signup failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -72,6 +96,14 @@ const Signup = () => {
         <button type="submit" className="signup-button">
           Create Account
         </button>
+
+        {/* Elegant Sign In Link */}
+        <p className="signup-footer">
+          Already have an account?{" "}
+          <Link to="/signin" className="signin-link">
+            Sign In
+          </Link>
+        </p>
       </form>
     </div>
   );

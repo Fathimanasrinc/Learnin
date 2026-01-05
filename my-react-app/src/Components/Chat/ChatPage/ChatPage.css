@@ -1,0 +1,12 @@
+.chat-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+
+.loading-text {
+  color: #555;
+  font-size: 16px;
+}
