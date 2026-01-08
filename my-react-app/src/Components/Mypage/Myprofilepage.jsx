@@ -4,9 +4,24 @@ import "./Myprofilepage.css";
 const Myprofilepage = () => {
   const [editMode, setEditMode] = useState(false);
   const [newSkill, setNewSkill] = useState("");
+  const ProfileRow = ({ label, value, editMode, onChange, textarea }) => (
+    <div className="profile-row">
+      <label>{label}</label>
+
+      {editMode ? (
+        textarea ? (
+          <textarea value={value} onChange={onChange} />
+        ) : (
+          <input value={value} onChange={onChange} />
+        )
+      ) : (
+        <p>{value}</p>
+      )}
+    </div>
+  );
 
   const DEFAULT_PROFILE_IMAGE =
-  "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+    "https://cdn.vectorstock.com/i/500p/71/90/blank-avatar-placeholder-icon-vector-30257190.jpg";
   const [profile, setProfile] = useState("");
   useEffect(() => {
     const fetchProfile = async () => {
@@ -24,19 +39,6 @@ const Myprofilepage = () => {
 
     fetchProfile();
   }, []);
-
-  const reviews = [
-    {
-      name: "Alice Smith",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-      comment: "Excellent work quality and attention to detail.",
-    },
-    {
-      name: "Mark Johnson",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      comment: "Very responsive and professional.",
-    },
-  ];
 
   const handleSkillChange = (index, value) => {
     const updated = [...profile.skills];
@@ -81,142 +83,118 @@ const Myprofilepage = () => {
     return <div className="profile-container">Loading profile...</div>;
   }
   return (
-    <div className="profile-container">
-      {/* LEFT SECTION */}
-      <div className="left-section">
-        <button
-          className="edit-toggle"
-          type="button"
-          onClick={async () => {
-            if (editMode) {
-              await saveProfile();
-            }
-            setEditMode(!editMode);
-          }}
-        >
-          {editMode ? "Save" : "Edit Profile"}
-        </button>
+    <div className="profile-main">
+      <h3 className="profile-title">Profile</h3>
 
-        <div className="image-wrapper">
-          <img src={profile.image || DEFAULT_PROFILE_IMAGE}  alt="Profile" className="profile-image" />
-          <span className="credits">
-             
-              {profile.credits}
-            
-          </span>
+      <div className="profile-card-new">
+        {/* LEFT SIDE */}
+        <div className="profile-left-new">
+          <div className="profile-image-box">
+            <img src={profile.image || DEFAULT_PROFILE_IMAGE} alt="Profile" />
+          </div>
+
+          {editMode && (
+            <input
+              className="input-light"
+              placeholder="Profile image URL"
+              value={profile.image}
+              onChange={(e) =>
+                setProfile({ ...profile, image: e.target.value })
+              }
+            />
+          )}
+
+          {/* RATING */}
+          <div className="profile-row">
+            <div className="rating-new">
+              {[...Array(5)].map((_, i) => (
+                <img
+                  key={i}
+                  className="star-new"
+                  src={
+                    i < profile.rating
+                      ? "https://cdn-icons-png.flaticon.com/512/616/616489.png"
+                      : "https://cdn-icons-png.flaticon.com/512/616/616490.png"
+                  }
+                  alt="star"
+                  onClick={() =>
+                    editMode && setProfile({ ...profile, rating: i + 1 })
+                  }
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
-        {editMode && (
-          <input
-            className="input-field"
-            value={profile.image}
-            placeholder="Profile image URL"
-            onChange={(e) => setProfile({ ...profile, image: e.target.value })}
-          />
-        )}
-
-        {editMode ? (
-          <input
-            className="input-field"
+        {/* RIGHT SIDE */}
+        <div className="profile-right-new">
+          {/* NAME */}
+          <ProfileRow
+            label="Name"
             value={profile.name}
+            editMode={editMode}
             onChange={(e) => setProfile({ ...profile, name: e.target.value })}
           />
-        ) : (
-          <h2 className="username">{profile.name}</h2>
-        )}
 
-        <div className="rating">
-          {[...Array(5)].map((_, i) => (
-            <img
-              key={i}
-              className="star"
-              src={
-                i < profile.rating
-                  ? "https://cdn-icons-png.flaticon.com/512/616/616489.png"
-                  : "https://cdn-icons-png.flaticon.com/512/616/616490.png"
-              }
-              alt="star"
-              onClick={() =>
-                editMode && setProfile({ ...profile, rating: i + 1 })
-              }
-            />
-          ))}
-        </div>
+          {/* BIO */}
+          <ProfileRow
+            label="Bio"
+            value={profile.bio}
+            editMode={editMode}
+            textarea
+            onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+          />
 
-        {/* REVIEWS (READ-ONLY) */}
-        <div className="reviews">
-          {reviews.map((review, i) => (
-            <div key={i} className="review-card">
-              <img
-                src={review.image}
-                alt={review.name}
-                className="reviewer-img"
-              />
-              <div>
-                <strong>{review.name}</strong>
-                <p>{review.comment}</p>
+          {/* SKILLS */}
+          <div className="profile-row">
+            <label>Skills</label>
+
+            <div className="skills-new">
+              {profile.skills.map((skill, i) => (
+                <span className="skill-chip-new" key={i}>
+                  {editMode ? (
+                    <>
+                      <input
+                        value={skill}
+                        onChange={(e) => handleSkillChange(i, e.target.value)}
+                      />
+                      <span
+                        className="remove-skill"
+                        onClick={() => deleteSkill(i)}
+                      >
+                        ✕
+                      </span>
+                    </>
+                  ) : (
+                    skill
+                  )}
+                </span>
+              ))}
+            </div>
+
+            {editMode && (
+              <div className="add-skill-new">
+                <input
+                  placeholder="Add skill"
+                  value={newSkill}
+                  onChange={(e) => setNewSkill(e.target.value)}
+                />
+                <button onClick={addSkill}>Add</button>
               </div>
-            </div>
-          ))}
+            )}
+          </div>
+
+          {/* SAVE BUTTON */}
+          <button
+            className="edit-btn-new"
+            onClick={async () => {
+              if (editMode) await saveProfile();
+              setEditMode(!editMode);
+            }}
+          >
+            {editMode ? "Save Profile" : "Edit Profile"}
+          </button>
         </div>
-      </div>
-
-      {/* RIGHT SECTION */}
-      <div className="right-section">
-        <div className="top-content">
-          <h3>Bio</h3>
-          {editMode ? (
-            <textarea
-              className="textarea"
-              value={profile.bio}
-              onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-            />
-          ) : (
-            <p className="bio">{profile.bio}</p>
-          )}
-
-          <h3>Skills</h3>
-          <ul className="skills">
-            {profile.skills.map((skill, i) => (
-              <li key={i} className="skill-item">
-                {editMode ? (
-                  <>
-                    <input
-                      value={skill}
-                      onChange={(e) => handleSkillChange(i, e.target.value)}
-                      className="skill-input"
-                    />
-                    <button
-                      className="delete-skill-btn"
-                      onClick={() => deleteSkill(i)}
-                    >
-                      ✕
-                    </button>
-                  </>
-                ) : (
-                  skill
-                )}
-              </li>
-            ))}
-          </ul>
-
-          {/* ADD SKILL */}
-          {editMode && (
-            <div className="add-skill">
-              <input
-                className="skill-input"
-                placeholder="Add new skill"
-                value={newSkill}
-                onChange={(e) => setNewSkill(e.target.value)}
-              />
-              <button className="add-skill-btn" onClick={addSkill}>
-                Add
-              </button>
-            </div>
-          )}
-        </div>
-
-        <button className="message-btn">Message</button>
       </div>
     </div>
   );

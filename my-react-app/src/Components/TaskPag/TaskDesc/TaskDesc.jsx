@@ -4,12 +4,12 @@ import ReportForm from "../ReportBox/ReportBox"; // adjust path
 
 function TaskDesc({ request, onClose }) {
   const [showReport, setShowReport] = useState(false);
-   const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("");
   const token = localStorage.getItem("token");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(request._id, "rrrrrrrrrrrrr");
     if (!description.trim()) return alert("Description required");
 
     const res = await fetch("http://localhost:5000/api/reports", {
@@ -21,9 +21,10 @@ function TaskDesc({ request, onClose }) {
       body: JSON.stringify({
         description,
         targetedUser: request.learner.userId,
+        requestId: request._id,
       }),
     });
-   onClose?.();
+    onClose?.();
 
     if (res.ok) {
       alert("Report submitted successfully");
@@ -32,9 +33,6 @@ function TaskDesc({ request, onClose }) {
       alert("Failed to submit report");
     }
   };
-
-
-  
 
   const completeTask = async () => {
     try {
@@ -61,25 +59,25 @@ function TaskDesc({ request, onClose }) {
       {/* REPORT FORM */}
       {showReport && (
         <div className="report-card">
-      <h3 className="report-title">Report User</h3>
+          <h3 className="report-title">Report User</h3>
 
-      <form onSubmit={handleSubmit}>
-        <label className="report-label">Description</label>
+          <form onSubmit={handleSubmit}>
+            <label className="report-label">Description</label>
 
-        <textarea
-          className="report-textarea"
-          placeholder="Explain the issue clearly..."
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows={5}
-          required
-        />
+            <textarea
+              className="report-textarea"
+              placeholder="Explain the issue clearly..."
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={5}
+              required
+            />
 
-        <button className="report-button" type="submit">
-          Submit Report
-        </button>
-      </form>
-    </div>
+            <button className="report-button" type="submit">
+              Submit Report
+            </button>
+          </form>
+        </div>
       )}
 
       {/* TASK DESCRIPTION */}
@@ -111,10 +109,7 @@ function TaskDesc({ request, onClose }) {
             Confirm Task
           </button>
 
-          <button
-            className="report-btn"
-            onClick={() => setShowReport(true)}
-          >
+          <button className="report-btn" onClick={() => setShowReport(true)}>
             Report
           </button>
         </div>

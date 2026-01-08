@@ -2,6 +2,7 @@ import express from "express";
 import Request from "../models/Requests.js";
 import User from "../models/User.js";
 import protect from "../middleware/auth.js";
+import adminAuth from "../middleware/adminAuth.js";
 
 const router = express.Router();
 
@@ -126,6 +127,17 @@ router.delete("/:id", protect, async (req, res) => {
   }
 });
 
+// routes/requestRoutes.js
+router.get("/:id", protect, adminAuth, async (req, res) => {
+  try {
+    const request = await Request.findById(req.params.id);
+    if (!request) return res.status(404).json({ message: "Request not found" });
+    res.json(request);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 
 export default router;

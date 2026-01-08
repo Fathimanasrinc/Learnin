@@ -2,18 +2,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminChatModal from "./AdminChatModal";
-import "./AdminReports.css";
+import "./AdminReportsDetails.css";
 
 const AdminReports = () => {
   const [reports, setReports] = useState([]);
   const [selectedReport, setSelectedReport] = useState(null);
 
-  const token = localStorage.getItem("token");
+  const adminToken = localStorage.getItem("adminToken");
   const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:5000/api/reports", {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${adminToken}` },
     })
       .then((res) => res.json())
       .then((data) => setReports(data))
@@ -32,7 +32,7 @@ const AdminReports = () => {
       {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${adminToken}`,
         },
       }
     );
@@ -86,16 +86,12 @@ const AdminReports = () => {
               <p className="description">{report.description}</p>
             </div>
             <button
-              className="chat-btn"
-              onClick={() =>
-                setSelectedReport({
-                  submittedBy: report.submittedBy._id,
-                  targetedUser: report.targetedUser._id,
-                })
-              }
-            >
-              View Chat
-            </button>
+  className="chat-btn"
+  onClick={() => navigate(`/admin/reports/${report._id}`)}
+>
+  View Request Details
+</button>
+
 
             <button
               className="delete-btn"

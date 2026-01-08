@@ -1,51 +1,32 @@
 import "./App.css";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Home from "./Components/HomePage/Home/Home.jsx";
 import Signup from "./Components/Signup/Signup.jsx";
 import TasksPage from "./Components/TaskPag/TasksPage/TasksPage.jsx";
-import Navbar from "./Components/HomePage/Navbar/Navbar.jsx";
-import Sidebar from "./Components/HomePage/Sidebar/Sidebar.jsx";
 import ProfilePage from "./Components/ProfilePage/ProfilePage.jsx";
 import Myprofilepage from "./Components/Mypage/Myprofilepage.jsx";
 import Profile from "./Components/Profile/Profile.jsx";
 import RequestPage from "./Components/Request/Requestpage/RequestPage.jsx";
-import ChatBox from "./Components/Chat/Chatbox/Chatbox.jsx";
-import SearchResults from "./Components/SearchResults/SearchResults.jsx";
 import ChatPage from "./Components/Chat/ChatPage/Chatpage.jsx";
+import SearchResults from "./Components/SearchResults/SearchResults.jsx";
 import Login from "./Components/Login/Login.jsx";
+
 import AdminReports from "./Components/adminReports.jsx";
 import AdminUsers from "./Components/AdminUsers.jsx";
 import AdminUserEdit from "./Components/AdminUserEdit.jsx";
+import AdminLogin from "./Components/AdminLogin.jsx";
+import AdminReportDetails from "./Components/AdminReportDetails.jsx";
+import AddAdmin from "./Components/AddAdmin.jsx";
+
+import UserLayout from "./Components/UserLayout.jsx";
+import AdminLayout from "./Components/AdminLayout.jsx";
 
 function App() {
-  const location = useLocation();
-
-  // Pages where Navbar and Sidebar should be hidden
-  const noNavPages = [
-    "/signin",
-    "/signup",
-    "/admin/reports",
-    "/admin/users",
-    "/admin/users/:id"
-  ];
-
-  const hideNav = noNavPages.some((path) =>
-    location.pathname.includes(path.replace("/:id", ""))
-  );
-
   return (
-    <>
-      {/* Conditionally render Navbar + Sidebar */}
-      {!hideNav && (
-        <>
-          <Navbar />
-          <Sidebar />
-        </>
-      )}
-
-      {/* Page content */}
-      <Routes>
+    <Routes>
+      {/* USER PAGES (USER NAVBAR + SIDEBAR) */}
+      <Route element={<UserLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -56,11 +37,20 @@ function App() {
         <Route path="/ProfilePage/:id" element={<ProfilePage />} />
         <Route path="/chat/:mentorId" element={<ChatPage />} />
         <Route path="/searchresult" element={<SearchResults />} />
-        <Route path="/admin/reports" element={<AdminReports />} />
-        <Route path="/admin/users" element={<AdminUsers />} />
-        <Route path="/admin/users/:id" element={<AdminUserEdit />} />
-      </Routes>
-    </>
+      </Route>
+
+      {/* ADMIN LOGIN (NO NAVBAR) */}
+      <Route path="/admin/login" element={<AdminLogin />} />
+
+      {/* ADMIN PAGES (ADMIN NAVBAR ONLY) */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="reports" element={<AdminReports />} />
+        <Route path="reports/:id" element={<AdminReportDetails />} />
+        <Route path="users" element={<AdminUsers />} />
+        <Route path="users/:id" element={<AdminUserEdit />} />
+        <Route path="add-admin" element={<AddAdmin />} />
+      </Route>
+    </Routes>
   );
 }
 

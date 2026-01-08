@@ -155,7 +155,7 @@ const showtask =(task)=>{
 }
  {taskbox && 
   <TaskDesc
-    request={shwtask} onClose={() => settask(false)} 
+    request={shwtask} onClose={() => setshowtask(false)} 
   />
 }
     </div>

@@ -67,6 +67,24 @@ router.get("/messages/:chatId", protect, async (req, res) => {
 
   res.json(messages);
 });
+router.get(
+  "/request/:requestId/chats",
+  adminAuth,
+  async (req, res) => {
+    try {
+      const chats = await Chat.find({
+        request: req.params.requestId,
+      })
+        .populate("sender", "name")
+        .sort({ createdAt: 1 });
+
+      res.json(chats);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch chats" });
+    }
+  }
+);
+
 
 router.get("/between/:user1/:user2", protect, adminAuth, async (req, res) => {
   try {

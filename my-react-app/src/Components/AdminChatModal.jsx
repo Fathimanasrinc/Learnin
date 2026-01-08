@@ -3,13 +3,14 @@ import "./AdminChatModal.css";
 
 const AdminChatModal = ({ users, onClose }) => {
   const [messages, setMessages] = useState([]);
-  const token = localStorage.getItem("token");
+  const adminToken = localStorage.getItem("adminToken");
+  console.log(users);
 
   useEffect(() => {
     fetch(
       `http://localhost:5000/api/chat/between/${users.submittedBy}/${users.targetedUser}`,
       {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${adminToken}` },
       }
     )
       .then((res) => res.json())

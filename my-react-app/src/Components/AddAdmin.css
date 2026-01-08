@@ -1,0 +1,25 @@
+.add-admin-container {
+  padding: 20px;
+  max-width: 400px;
+}
+
+.add-admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.add-admin-form input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.add-admin-form button {
+  padding: 10px;
+  background: #1e293b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

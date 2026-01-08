@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import "./Login.css"; 
-import { useNavigate, Link } from "react-router-dom";
+import "../Components/Login/Login.css"; // you can reuse same CSS
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const AdminLogin = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -17,28 +18,32 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/admin/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.message || "Login failed");
+        alert(data.message || "Admin login failed");
         return;
       }
 
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      // ✅ Store admin token separately
+      localStorage.setItem("adminToken", data.token);
+      localStorage.setItem("admin", JSON.stringify(data));
 
-      console.log(data);
-     
-        navigate("/"); 
-      
+      console.log("Admin logged in:", data);
+
+      // 🔀 Redirect to admin dashboard
+      navigate("/admin/reports");
     } catch (err) {
-      console.error("Login error:", err);
+      console.error("Admin login error:", err);
       alert("Something went wrong. Please try again.");
     }
   };
@@ -46,12 +51,12 @@ const Login = () => {
   return (
     <div className="login-container">
       <form className="login-card" onSubmit={handleSubmit}>
-        <h2 className="login-title">Sign In</h2>
+        <h2 className="login-title">Admin Sign In</h2>
 
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Admin Email"
           value={formData.email}
           onChange={handleChange}
           required
@@ -71,17 +76,9 @@ const Login = () => {
         <button type="submit" className="login-button">
           Sign In
         </button>
-
-        {/* Elegant Sign Up Link */}
-        <p className="login-footer">
-          Don't have an account?{" "}
-          <Link to="/signup" className="signup-link">
-            Sign Up
-          </Link>
-        </p>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default AdminLogin;

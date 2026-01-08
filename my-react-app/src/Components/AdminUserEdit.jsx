@@ -5,7 +5,7 @@ import "./AdminUserEdit.css";
 const AdminUserEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const adminToken = localStorage.getItem("adminToken");
 
   const [form, setForm] = useState({
     name: "",
@@ -18,7 +18,7 @@ const AdminUserEdit = () => {
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/admin/users/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${adminToken}` },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -49,7 +49,7 @@ const AdminUserEdit = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${adminToken}`,
         },
         body: JSON.stringify(form),
       });

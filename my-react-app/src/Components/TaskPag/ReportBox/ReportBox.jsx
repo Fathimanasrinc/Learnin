@@ -20,6 +20,7 @@ const ReportBox = ({ targetedUserId }) => {
       body: JSON.stringify({
         description,
         targetedUser: targetedUserId,
+        
       }),
     });
 

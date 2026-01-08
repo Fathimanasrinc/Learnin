@@ -1,0 +1,33 @@
+.admin-navbar {
+  height: 60px;
+  background: #1e293b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.admin-logo {
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-actions button {
+  margin-left: 12px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #334155;
+  color: white;
+}
+
+.admin-actions button:hover {
+  background: #475569;
+}
+
+.logout-btn {
+  background: #dc2626 !important;
+}

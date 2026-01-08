@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
-  const token = localStorage.getItem("token");
+  const adminToken = localStorage.getItem("adminToken");
 
   useEffect(() => {
     fetch("http://localhost:5000/api/admin/users", {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${adminToken}` },
     })
       .then(res => res.json())
       .then(data => setUsers(data));
@@ -18,7 +18,7 @@ const AdminUsers = () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${adminToken}`,
       },
       body: JSON.stringify(data),
     });
