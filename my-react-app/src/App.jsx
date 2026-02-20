@@ -27,8 +27,8 @@ function App() {
     <Routes>
       {/* USER PAGES (USER NAVBAR + SIDEBAR) */}
       <Route element={<UserLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<Login />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Myprofilepage />} />
         <Route path="/task" element={<TasksPage />} />

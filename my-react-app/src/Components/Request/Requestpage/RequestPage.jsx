@@ -1,137 +1,160 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import "./RequestPage.css";
 import RequestDesc from "../RequestDesc/RequestDesc";
+import RequestToConfirm from "../RequestToConfirm/RequestToConfirm";
 
 const RequestPage = () => {
   const navigate = useNavigate();
 
-  const goToChat = (id) => {
-    console.log(id);
-    navigate(`/chat/${id}`);
-  };
   const [pendingRequests, setRequests] = useState([]);
-  const [acceptedRequests, setacceptedRequests] = useState([]);
-  const [acceptedRequest, setacceptedRequest] = useState(false);
-  const [showreqst, setshowrequest] = useState(null);
-  const [pendingbox, setpending] = useState(false);
-  const [shwpending, setshowpending] = useState(null);
-  const [shwreviewbox, setreview] = useState(false);
-  const [reviewbx, setreviewbx] = useState(null);
+  const [acceptedRequests, setAcceptedRequests] = useState([]);
+
+  const [acceptedBox, setAcceptedBox] = useState(false);
+  const [pendingBox, setPendingBox] = useState(false);
+
+  const [selectedRequest, setSelectedRequest] = useState(null);
+
+  const [mobileView, setMobileView] = useState("accepted"); // accepted | pending
 
   const token = localStorage.getItem("token");
-  console.log("TOKEN:", token);
+
+  const goToChat = (id) => {
+    if (!id) return;
+    navigate(`/chat/${id}`);
+  };
 
   useEffect(() => {
-    const fetchacceeptedRequests = async () => {
+    const fetchAccepted = async () => {
       try {
-        const response = await axios.get(
+        const res = await axios.get(
           "http://localhost:5000/api/requests/myacceptedrequests",
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+            headers: { Authorization: `Bearer ${token}` },
+          },
         );
-        setacceptedRequests(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error(error.response?.data || error.message);
-        alert("Failed to load your requests");
+        setAcceptedRequests(res.data);
+      } catch (err) {
+        console.error(err);
       }
     };
 
-    const fetchRequests = async () => {
+   
+
+    const fetchPending = async () => {
       try {
-        const response = await axios.get(
+        const res = await axios.get(
           "http://localhost:5000/api/requests/myrequests",
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+            headers: { Authorization: `Bearer ${token}` },
+          },
         );
-        setRequests(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error(error.response?.data || error.message);
-        alert("Failed to load your requests");
+        setRequests(res.data);
+      } catch (err) {
+        console.error(err);
       }
     };
-    fetchRequests();
-    fetchacceeptedRequests();
+
+    fetchAccepted();
+    fetchPending();
   }, [token]);
-  console.log(pendingRequests);
+
   const handleDelete = async (id) => {
-    const token = localStorage.getItem("token");
-
-    try {
-      const response = await fetch(`http://localhost:5000/api/requests/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.message || "Failed to delete request");
-        return;
-      }
-
-      // ✅ Remove deleted request from UI only if backend succeeds
-      setRequests((prev) => prev.filter((r) => r._id !== id));
-    } catch (error) {
-      console.error("Delete failed", error);
-      alert("Server error while deleting request");
+      try{
+      await axios.put(
+          `http://localhost:5000/api/users/creditupdate/${id}`,
+          {},
+          { headers: { Authorization: `Bearer ${token}` } },
+        );
     }
-  };
-  const showreq = (rqst) => {
-    setacceptedRequest(true);
-    setshowrequest(rqst);
-  };
-  const showpending = (rqst) => {
-    setpending(true);
-    setshowpending(rqst);
+    catch(err){
+       console.error(err);
+      alert("Failed to update credits");
+    }
+    try {
+      await axios.delete(`http://localhost:5000/api/requests/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setRequests((prev) => prev.filter((r) => r._id !== id));
+    } catch (err) {
+      console.error(err);
+      alert("Failed to cancel request");
+    }
+
+  
   };
 
-  console.log(pendingRequests, "pendiiiiiii");
+  const openAccepted = (req) => {
+    setSelectedRequest(req);
+    setAcceptedBox(true);
+  };
+
+  const openPending = (req) => {
+    setSelectedRequest(req);
+    setPendingBox(true);
+  };
+   const removeAcceptedRequest = (id) => {
+      setAcceptedRequests((prev) => prev.filter((r) => r._id !== id));
+    };
 
   return (
     <div className="request-container">
+      {/* MOBILE TOGGLE */}
+      <div className="mobile-toggle">
+        <button
+          className={mobileView === "accepted" ? "active" : ""}
+          onClick={() => setMobileView("accepted")}
+        >
+          Accepted
+        </button>
+        <button
+          className={mobileView === "pending" ? "active" : ""}
+          onClick={() => setMobileView("pending")}
+        >
+          Pending
+        </button>
+      </div>
+
       {/* ACCEPTED SECTION */}
-      <div className="request-section">
+      <div
+        className={`request-section ${
+          mobileView === "pending" ? "hidden-mobile" : ""
+        }`}
+      >
         <h2>Accepted</h2>
+
+        {acceptedRequests.length === 0 && (
+          <p className="empty-msg">No accepted requests</p>
+        )}
+
         <div className="request-list">
-          {acceptedRequests.map((user, index) => (
+          {acceptedRequests.map((req) => (
             <div
-              onClick={() => showreq( user)}
-              key={index}
-              className="request-card"
+              key={req._id}
+              className="request-cards"
+              onClick={() => openAccepted(req)}
             >
               <div className="left-info">
                 <img
-                  src={user.mentor.image}
-                  alt={user.mentor.name}
+                  src={req.mentor.image}
+                  alt={req.mentor.name}
                   className="profile-img"
                 />
-                <span className="user-name">{user.skills}</span>
+                <span className="user-name">{req.skills}</span>
               </div>
+
               <div className="right-info">
                 <button
                   className="message-btn"
                   onClick={(e) => {
                     e.stopPropagation();
-                    goToChat(user.mentor.userId);
+                    goToChat(req.mentor.userId);
                   }}
                 >
                   Message
                 </button>
-                <span className="deadline">{user.deadline}</span>
+                <span className="deadline">{req.deadline}</span>
               </div>
             </div>
           ))}
@@ -139,27 +162,40 @@ const RequestPage = () => {
       </div>
 
       {/* PENDING SECTION */}
-      <div className="request-section">
+      <div
+        className={`request-section ${
+          mobileView === "accepted" ? "hidden-mobile" : ""
+        }`}
+      >
         <h2>Pending</h2>
+
+        {pendingRequests.length === 0 && (
+          <p className="empty-msg">No pending requests</p>
+        )}
+
         <div className="request-list">
-          {pendingRequests.map((user, index) => (
+          {pendingRequests.map((req) => (
             <div
-              onClick={() => showpending( user)}
-              key={index}
-              className="request-card"
+              key={req._id}
+              className="request-cards"
+              onClick={() => openPending(req)}
             >
               <div className="left-info">
                 <img
-                  src={user.mentor.image}
-                  alt={user.mentor.name}
+                  src={req.mentor.image}
+                  alt={req.mentor.name}
                   className="profile-img"
                 />
-                <span className="user-name">{user.skills}</span>
+                <span className="user-name">{req.skills}</span>
               </div>
+
               <div className="right-info">
                 <button
                   className="cancel-btn"
-                  onClick={() => handleDelete(user._id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete(req._id);
+                  }}
                 >
                   Cancel
                 </button>
@@ -168,18 +204,23 @@ const RequestPage = () => {
           ))}
         </div>
       </div>
-      {acceptedRequest && (
+
+      {/* MODALS */}
+      {acceptedBox && (
         <RequestDesc
-          request={showreqst}
+          request={selectedRequest}
           confirm={true}
-          onClose={() => setacceptedRequest(false)}
+          onClose={() => setAcceptedBox(false)}
+          onTaskComplete={removeAcceptedRequest}
         />
       )}
-      {pendingbox && (
-        <RequestDesc
+
+      {pendingBox && (
+        <RequestToConfirm
+          request={selectedRequest}
           confirm={false}
-          request={shwpending}
-          onClose={() => settask(false)}
+          onClose={() => setPendingBox(false)}
+          setRequests={setRequests}
         />
       )}
     </div>

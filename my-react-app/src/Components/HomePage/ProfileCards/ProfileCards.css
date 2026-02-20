@@ -1,29 +1,39 @@
-/* Grid */
-.card-grid {
-
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 6px;
-  margin: 100px 0px 0px 250px;
+:root {
+  --color-midnight-navy: #06141b;
+  --color-deep-slate: #11212d;
+  --color-dark-steel: #253745;
+  --color-muted-blue: #4a5c6a;
+  --color-silver-mist: #9ba8ab;
+  --color-off-white-grey: #ccd0cf;
 }
 
-/* Card */
+/* Grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 12px;
+  margin: 0px 15px 0px 130px;
+  background-color: transparent;
+  padding-top: 70px;
+}
+
+/* Card - Medium Tone */
 .card {
-  background: #fff;
+  background: var(--color-dark-steel); /* medium-dark card background */
   border-radius: 14px;
   padding: 12px;
-  height: 155px;
-  width: 220px;
+  height: 145px;
+  width: 240px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   transition: all 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
 /* Content */
@@ -39,33 +49,14 @@
   text-align: center;
 }
 
-/* Avatar */
-.avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #d1d1d1, #f0f0f0);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 14px;
-  overflow: hidden;
-}
 
-.avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 /* Name */
 .username {
   margin: 6px 0 2px;
   font-size: 12px;
   font-weight: 600;
-  color: #222;
+  color: var(--color-off-white-grey); /* readable on medium background */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -78,7 +69,7 @@
 
 .star {
   font-size: 12px;
-  color: #d0d0d0;
+  color: var(--color-silver-mist);
 }
 
 .star.filled {
@@ -100,9 +91,9 @@
 .skill-pill {
   font-size: 10px;
   padding: 3px 8px;
-  background: #f3f4f6;
+  background: var(--color-deep-slate);
   border-radius: 999px;
-  color: #444;
+  color: var(--color-off-white-grey);
   white-space: nowrap;
 }
 
@@ -118,12 +109,14 @@
   font-size: 11px;
   border: none;
   border-radius: 8px;
-  background: #f3f3f3;
+  background: var(--color-muted-blue);
+  color: #fff;
   cursor: pointer;
+  transition: opacity 0.2s ease;
 }
 
 .action-btn.primary {
-  background: #222;
+  background: var(--color-midnight-navy);
   color: #fff;
 }
 
@@ -142,4 +135,71 @@
   .card-grid {
     grid-template-columns: 1fr;
   }
+}
+.user-left {
+  position: relative; /* make it relative so the credits circle can be absolute relative to this */
+  width: 80px;
+  text-align: center;
+}
+
+.avatar-container {
+  position: relative; /* makes absolute positioning inside possible */
+  width: 44px; /* same as avatar width */
+  height: 44px; /* same as avatar height */
+  margin: 0 auto; /* center the avatar */
+}
+
+.avatar {
+  width: 77px;
+  height: 77px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-muted-blue), var(--color-silver-mist));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Smaller glowing credit circle for avatar */
+.credits-circle {
+  position: absolute;
+  top: -4px;    /* adjust for perfect top-right */
+  right: -4px;
+  width: 25px;  /* smaller size */
+  height: 25px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #1a384b, #1B2A38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;       /* smaller number */
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 2px #3A7CA5, 0 0 4px #4A5C6A;
+  box-shadow: 0 0 6px #3A7CA5, 0 0 12px #4A5C6A;
+  animation: glow-small 2.5s infinite alternate;
+  cursor: default;
+}
+
+/* Glow animation for small badge */
+@keyframes glow-small {
+  0% { box-shadow: 0 0 3px #3A7CA5, 0 0 6px #4A5C6A; }
+  50% { box-shadow: 0 0 6px #3A7CA5, 0 0 12px #4A5C6A; }
+  100% { box-shadow: 0 0 3px #3A7CA5, 0 0 6px #4A5C6A; }
+}
+
+
+
+@keyframes sparkle-small {
+  0% { transform: translate(0,0) scale(1); opacity: 0.6; }
+  50% { transform: translate(-2px,-2px) scale(1.2); opacity: 1; }
+  100% { transform: translate(0,0) scale(1); opacity: 0.6; }
 }

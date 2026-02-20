@@ -1,31 +1,70 @@
+:root {
+  --color-midnight-navy: #06141b;
+  --color-deep-slate: #11212d;
+  --color-dark-steel: #253745;
+  --color-muted-blue: #4a5c6a;
+  --color-silver-mist: #9ba8ab;
+  --color-off-white-grey: #ccd0cf;
+}
+
+/* BODY */
 body {
-  background: #f4f4f4;
-  font-family: Arial, sans-serif;
+  background: var(--color-off-white-grey);
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 /* MAIN CONTAINER */
 .tasks-container {
   max-width: 1000px;
-  margin: 40px auto;
-  margin-left: 225px;
   margin-top: 60px;
+  margin-left: 160px; /* sidebar width */
+  margin-right: auto;
+
   display: flex;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+
+/* MOBILE TOGGLE BUTTONS */
+.mobile-toggle {
+  display: none;
+  justify-content: center;
+  margin-bottom: 15px;
   gap: 10px;
+}
+
+.mobile-toggle button {
+  flex: 1;
+  padding: 8px 12px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--color-muted-blue);
+  color: white;
+  transition: all 0.3s;
+}
+
+.mobile-toggle button.active {
+  background: var(--color-midnight-navy);
 }
 
 /* TASKS SECTION */
 .tasks-section {
-  background: white;
   flex: 1;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
 }
 
 .tasks-section h2 {
   margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 5px solid var(  --color-dark-steel);
   padding-bottom: 8px;
+  color: var(--color-midnight-navy);
 }
 
 /* TASK BOX */
@@ -33,10 +72,18 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 10px;
+  padding: 14px 12px;
   margin-bottom: 12px;
-  background: #f7f7f7;
-  border-radius: 8px;
+  background: var(--color-deep-slate);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.task-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* PROFILE IMAGE + NAME */
@@ -51,10 +98,12 @@ body {
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid var(--color-muted-blue);
 }
 
 .name {
   font-weight: bold;
+  color: var(--color-off-white-grey);
 }
 
 /* TASK ACTIONS */
@@ -65,11 +114,9 @@ body {
   gap: 6px;
 }
 
-/* REQUEST ACTIONS INLINE */
 .request-actions {
   flex-direction: row;
   gap: 6px;
-  align-items: center;
 }
 
 /* BUTTONS */
@@ -81,25 +128,61 @@ body {
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
+  transition: background 0.3s;
 }
 
 .message-btn {
-  background: #555;
-  color: white;
+  background: var(--color-silver-mist);
+  color: var(--color-midnight-navy);
 }
 
 .accept-btn {
-  background: #28a745;
+  background: var(--color-silver-mist);
   color: white;
 }
 
+.accept-btn:hover {
+  background: var(--color-midnight-navy);
+}
+
 .decline-btn {
-  background: #dc3545;
+  background: #253745;
   color: white;
+}
+
+.decline-btn:hover {
+  background:  var(--color-midnight-navy);
 }
 
 /* DEADLINE */
 .deadline {
   font-size: 12px;
-  color: #777;
+  color: var(--color-silver-mist);
+}
+
+/* EMPTY MSG */
+.empty-msg {
+  text-align: center;
+  color: var(--color-silver-mist);
+  font-style: italic;
+}
+
+/* RESPONSIVE - MOBILE */
+@media (max-width: 768px) {
+  .tasks-container {
+    flex-direction: column;
+    margin-left: 0;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .tasks-section {
+    width: 100%;
+  }
+
+  .hidden-mobile {
+    display: none;
+  }
 }

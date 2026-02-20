@@ -35,7 +35,7 @@ const Login = () => {
 
       console.log(data);
      
-        navigate("/"); 
+        navigate("/Home"); 
       
     } catch (err) {
       console.error("Login error:", err);

@@ -1,15 +1,144 @@
-.report-btn {
-  margin-top: 10px;
-  width: 100%;
-  padding: 10px;
-  background: transparent;
-  border: 1px solid #f87171;
-  color: #f87171;
-  border-radius: 6px;
-  cursor: pointer;
+:root {
+  --color-midnight-navy: #06141b;
+  --color-deep-slate: #11212d;
+  --color-dark-steel: #253745;
+  --color-muted-blue: #4a5c6a;
+  --color-silver-mist: #9ba8ab;
+  --color-off-white-grey: #ccd0cf;
+  --color-accent: #4a90e2;
 }
 
-.report-btn:hover {
-  background: #f87171;
-  color: #fff;
+/* Full screen overlay */
+.task-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(6, 20, 27, 0.75); /* semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Task card */
+.task-container {
+  max-width: 450px;
+  width: 90%;
+  padding: 25px 30px;
+  margin-top: 79px;
+  background: var(--color-deep-slate);
+  border-radius: 16px;
+  color: var(--color-off-white-grey);
+  font-family: Arial, sans-serif;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-20px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+/* Heading */
+.task-heading {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Fields */
+.task-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.task-label {
+  display: block;
+  font-size: 14px;
+  color: var(--color-silver-mist);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+/* Better readability for values */
+.task-value {
+  padding: 14px;
+  background: linear-gradient(
+    145deg,
+    var(--color-dark-steel),
+    var(--color-muted-blue)
+  );
+  border-radius: 12px;
+  font-size: 15px;
+  color: var(--color-off-white-grey);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+/* Special handling for long descriptions */
+.task-value--description {
+  max-height: 140px;          /* prevents modal stretching */
+  overflow-y: auto;
+  padding-right: 12px;
+}
+
+/* Subtle scrollbar (not ugly) */
+.task-value--description::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-value--description::-webkit-scrollbar-thumb {
+  background: var(--color-muted-blue);
+  border-radius: 6px;
+}
+
+.task-value--description::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Buttons */
+.accept-btn-task, .report-btn-task {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 12px;
+  transition: all 0.25s ease;
+}
+
+/* Confirm Task button */
+.accept-btn-task {
+  background: linear-gradient(135deg, var(--color-muted-blue), var(--color-dark-steel));
+  color: var(--color-off-white-grey);
+}
+
+.accept-btn-task:hover {
+  background: linear-gradient(135deg, #5b6d7d, #253745);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+/* Report button */
+.report-btn-task {
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.report-btn-task:hover {
+  background-color: var(--color-accent);
+  color: var(--color-off-white-grey);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }

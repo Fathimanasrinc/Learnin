@@ -13,17 +13,22 @@ function SearchResults() {
   const { state } = useLocation();
   const search = state?.search;
   const [results, setResults] = useState([]);
-  console.log(search);
   useEffect(() => {
     console.log(search);
+      const token = localStorage.getItem("token");
+
     const fetchProfiles = async () => {
 
       try {
-        const res = await axios.get(
-          `http://localhost:5000/api/users/search/${search}`
-        );
+        
+        const res = await fetch(`http://localhost:5000/api/users/search/${search}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await res.json();
 
-        setResults(res.data);
+        setResults(data);
       } catch (error) {
         console.error(error);
       }
@@ -40,7 +45,7 @@ function SearchResults() {
     setshowRequestBox(true); // show component
   };
 
-  if (!results) return <p>Loading users...</p>;
+  if (!results) return <p >Loading users...</p>;
   return (
     <div className="card-grid">
       {results.map((user) => (
@@ -63,7 +68,7 @@ function SearchResults() {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span
                     key={star}
-                    className={star <= user.starCount ? "star filled" : "star"}
+                    className={star <= user.rating ? "star filled" : "star"}
                   >
                     ★
                   </span>

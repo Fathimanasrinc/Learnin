@@ -81,6 +81,7 @@ router.get("/myacceptedrequests", protect, async (req, res) => {
   }
 });
 router.put("/accept/:id", protect, async (req, res) => {
+  console.log("hihello");
   try {
     const request = await Request.findById(req.params.id);
 
@@ -90,6 +91,7 @@ router.put("/accept/:id", protect, async (req, res) => {
 
     // ✅ Only mentor can accept
     if (request.mentor.userId.toString() !== req.user._id.toString()) {
+      console.log("hi");
       return res.status(403).json({ message: "Not authorized" });
     }
 
@@ -109,10 +111,10 @@ router.put("/accept/:id", protect, async (req, res) => {
 
 router.delete("/:id", protect, async (req, res) => {
   try {
-    console.log(req.params.id);
     const request = await Request.findById(req.params.id);
 
     if (!request) {
+      console.log("nor result");
       return res.status(404).json({ message: "Request not found" });
     }
 

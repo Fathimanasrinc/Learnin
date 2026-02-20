@@ -1,0 +1,31 @@
+:root {
+  --color-midnight-navy: #06141b;
+  --color-deep-slate: #11212d;
+  --color-dark-steel: #253745;
+  --color-muted-blue: #4a5c6a;
+  --color-silver-mist: #9ba8ab;
+  --color-off-white-grey: #ccd0cf;
+}
+
+.user-layout {
+  min-height: 100vh;
+  display: flex;
+  background-image:  linear-gradient(
+       to bottom,
+      #4a5c6a9b  10%,      /* light center */
+           /* mid shading */
+      #06141b00 100%   /* darker edges */
+    ),
+    url("https://i.pinimg.com/1200x/de/71/dc/de71dccbe74adfeeaded119c808dc335.jpg");
+ background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+}
+
+/* content area next to sidebar */
+.user-content {
+  flex: 1;
+  padding: 20px;
+  background: transparent; /* important */
+}

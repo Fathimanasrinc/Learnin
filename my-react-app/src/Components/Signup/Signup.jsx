@@ -100,7 +100,7 @@ const Signup = () => {
         {/* Elegant Sign In Link */}
         <p className="signup-footer">
           Already have an account?{" "}
-          <Link to="/signin" className="signin-link">
+          <Link to="/" className="signin-link">
             Sign In
           </Link>
         </p>

@@ -60,17 +60,18 @@ function RequestBox({ mentor, onClose }) {
   };
 
   return (
-    <div className="form-container">
+  <div className="modal-overlay" onClick={onClose}>
+    <div className="form-container" onClick={(e) => e.stopPropagation()}>
       <h2 className="form-title">Request Form</h2>
 
       <form onSubmit={handleSubmit} className="request-form">
-        {/* Skill selection */}
         <label className="form-label">
-          Skills You Need:
+          Skills You Need
           <select
             name="skills"
             value={formData.skills}
             onChange={handleChange}
+            className="form-input"
             required
           >
             <option value="">Select a skill</option>
@@ -82,7 +83,6 @@ function RequestBox({ mentor, onClose }) {
           </select>
         </label>
 
-        {/* Description */}
         <label className="form-label">
           What Do You Expect?
           <textarea
@@ -92,10 +92,9 @@ function RequestBox({ mentor, onClose }) {
             className="form-textarea"
             placeholder="Describe your expectations..."
             required
-          ></textarea>
+          />
         </label>
 
-        {/* Deadline */}
         <label className="form-label">
           Deadline
           <input
@@ -108,7 +107,6 @@ function RequestBox({ mentor, onClose }) {
           />
         </label>
 
-        {/* Credits offered */}
         <label className="form-label">
           Credits You Offer
           <input
@@ -124,11 +122,13 @@ function RequestBox({ mentor, onClose }) {
         </label>
 
         <button type="submit" className="submit-button">
-          Submit
+          Submit Request
         </button>
       </form>
     </div>
-  );
+  </div>
+);
+
 }
 
 export default RequestBox;

@@ -21,18 +21,29 @@ router.get("/", protect, async (req, res) => {
   }
 });
 
+router.get("/me", protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("credits email name"); // select only fields you need
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-router.get("/search/:skill", async (req, res) => {
+    res.json(user); // returns { credits: ..., email: ..., name: ... }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.get("/search/:skill",protect, async (req, res) => {
   try {
     const  skill  = req.params.skill;
-    console.log(skill,"skilllllllll")
     if (!skill) {
       return res.status(400).json({ message: "Skill is required" });
     }
     const users = await User.find({
       skills: { $regex: skill, $options: "i" }
     }).select("-password");
-    console.log(users,"userssssssss")
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
@@ -94,6 +105,29 @@ console.log(requestId)
   request.status = "completed"
   user.credits += credits;
   req.user.credits-=credits;
+
+  await user.save();
+  await request.save();
+
+  res.json({
+    message: "credit updated",
+  });
+});
+router.put("/creditupdate/:Id", protect, async (req, res) => {
+  const requestId = req.params.Id;
+  console.log(requestId)
+
+  const request = await Request.findById(requestId);
+  console.log(request,"credit of resajkfhekarhej")
+  const user = await User.findById(request.learner.userId);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  const credits = request.credits;
+  console.log(credits);
+
+  user.credits += credits;
 
   await user.save();
   await request.save();

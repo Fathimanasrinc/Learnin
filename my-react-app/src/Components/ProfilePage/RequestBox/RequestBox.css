@@ -1,79 +1,154 @@
-/* Background & layout */
-.form-container {
-  position: absolute;
-  top: -15%;
-  left: 20%;
-  background-color: #111; /* deep dark background */
-  color: #fff; /* white text */
-  padding: 20px;
-  max-width: 500px;
-  margin: 40px auto;
-  border-radius: 8px;
-  border: 1px solid #444;
-  font-family: Arial, sans-serif;
+/* --------------------------------------- */
+/* Overlay for modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  padding-top: 60px; /* leave space for navbar */
+  background: rgba(6, 20, 27, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
 }
 
-/* Title */
+
+/* --------------------------------------- */
+/* Modal container */
+.form-container {
+  background: linear-gradient(180deg, #11212d, #06141b); /* --color-deep-slate to midnight navy */
+  color: #ccd0cf; /* --color-off-white-grey */
+  width: 100%;
+  max-width: 460px;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  animation: popIn 0.25s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Animation for popup */
+@keyframes popIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------- */
+/* Form Title */
 .form-title {
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 22px;
   font-size: 1.6rem;
-  color: #eee;
+  color: #ccd0cf;
+  font-weight: 600;
 }
 
+/* --------------------------------------- */
+/* Form container spacing */
+.request-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* --------------------------------------- */
 /* Labels */
 .form-label {
-  display: block;
-  margin: 12px;
-  font-size: 1rem;
-  color: #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+  letter-spacing: 0.4px;
+  color: #9ba8ab; /* --color-silver-mist */
 }
 
-/* Inputs & selects */
+/* --------------------------------------- */
+/* Inputs, Textarea, Select */
 .form-input,
-.form-select,
-.form-textarea {
-  width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  border: 1px solid #555;
-  border-radius: 4px;
-  background-color: #222;
-  color: #fff;
-  font-size: 1rem;
-}
-
-/* Multiple select height */
+.form-textarea,
 .form-select {
-  height: 120px;
+  background: linear-gradient(180deg, #06141b, #0c1f2a); /* midnight navy gradient */
+  border: 1px solid #253745; /* --color-dark-steel */
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #ccd0cf;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 0 0 transparent;
 }
 
-/* Placeholder color */
+/* Hover + focus effects */
+.form-input:hover,
+.form-textarea:hover,
+.form-select:hover {
+  border-color: #4a5c6a; /* --color-muted-blue */
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: #4a5c6a;
+  box-shadow:
+    0 0 0 2px rgba(74, 92, 106, 0.25), /* subtle glow */
+    inset 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Placeholder styling */
 .form-input::placeholder,
 .form-textarea::placeholder {
-  color: #aaa;
+  color: #6f7f86;
+  font-size: 0.85rem;
 }
 
-/* Textarea */
+/* --------------------------------------- */
+/* Textarea specific */
 .form-textarea {
+  min-height: 100px;
+  line-height: 1.5;
   resize: vertical;
-  min-height: 80px;
-  margin-bottom: 12px;
 }
 
+/* --------------------------------------- */
+/* Select dropdown styling */
+select.form-input {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #9ba8ab 50%),
+    linear-gradient(135deg, #9ba8ab 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 55%,
+    calc(100% - 13px) 55%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 36px;
+}
+
+/* --------------------------------------- */
 /* Submit button */
 .submit-button {
-  background-color: #444;
-  color: #fff;
-  padding: 10px 14px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
   width: 100%;
-  font-size: 1.1rem;
-  margin-top: 10px;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #253745, #4a5c6a); /* dark-steel to muted-blue */
+  color: #ccd0cf;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .submit-button:hover {
-  background-color: #555;
+  transform: translateY(-1px);
+  opacity: 0.95;
+  background: linear-gradient(135deg, #4a5c6a, #253745); /* subtle gradient swap */
 }

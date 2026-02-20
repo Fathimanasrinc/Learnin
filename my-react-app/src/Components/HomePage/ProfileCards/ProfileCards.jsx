@@ -4,15 +4,12 @@ import RequstBox from "../../ProfilePage/RequestBox/RequestBox";
 import "./ProfileCards.css";
 
 export default function ProfileCards() {
-
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showRequestBox, setshowRequestBox] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
-
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -41,9 +38,9 @@ export default function ProfileCards() {
     navigate(`/ProfilePage/${user._id}`);
   };
 
-   const handleClick = (user) => {
-    setSelectedUser(user);   // pass data
-    setshowRequestBox(true);      // show component
+  const handleClick = (user) => {
+    setSelectedUser(user); // pass data
+    setshowRequestBox(true); // show component
   };
 
   if (loading) return <p>Loading users...</p>;
@@ -61,7 +58,10 @@ export default function ProfileCards() {
                 ) : (
                   <span>{user.name.charAt(0).toUpperCase()}</span>
                 )}
+
               </div>
+              
+                <div className="credits-circle">{user.credits}</div>
 
               <p className="username">{user.name}</p>
 
@@ -69,7 +69,7 @@ export default function ProfileCards() {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span
                     key={star}
-                    className={star <= user.starCount ? "star filled" : "star"}
+                    className={star <= user.rating ? "star filled" : "star"}
                   >
                     ★
                   </span>
@@ -94,11 +94,21 @@ export default function ProfileCards() {
             <button className="action-btn" onClick={() => goToProfile(user)}>
               View Profile
             </button>
-            <button className="action-btn primary"  onClick={() => handleClick(user)}>Request</button>
+            <button
+              className="action-btn primary"
+              onClick={() => handleClick(user)}
+            >
+              Request
+            </button>
           </div>
         </div>
       ))}
-       {showRequestBox && <RequstBox mentor={selectedUser} onClose={() => setshowRequestBox(false)} />}
+      {showRequestBox && (
+        <RequstBox
+          mentor={selectedUser}
+          onClose={() => setshowRequestBox(false)}
+        />
+      )}
     </div>
   );
 }

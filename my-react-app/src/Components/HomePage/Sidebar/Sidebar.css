@@ -1,43 +1,118 @@
+/* Sidebar container */
 .sidebar {
-  width: 220px;
+  width: 100px;
   height: 100vh;
-  background-color: #494949;
-  color:white ;
+  background-color: #4a5c6a; /* Dark gradient from your palette */
+  color: #fff;
   display: flex;
   flex-direction: column;
-  padding-top: 60px;
+  padding: 20px 15px;
   position: fixed;
+  padding-top: 100px;
   left: 0;
-  top: 0%;
-  z-index: 0;
+  top: 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  font-family: 'Poppins', sans-serif;
 }
 
+/* Sidebar items */
 .sidebar-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 12px 20px;
+  gap: 15px;
+  padding: 12px 16px;
   cursor: pointer;
-  border-radius: 10px;
-  margin: 4px 10px;
-  transition: background-color 0.2s ease;
-}
-span{
-  text-decoration: none;
+  border-radius: 12px;
+  margin: 6px 0;
+  transition: background 0.3s, transform 0.2s;
 }
 
 .sidebar-item:hover {
-  background-color: #272727;
+  background-color: #253745; /* Slightly lighter hover from palette */
+  transform: translateX(5px);
 }
 
+/* Icon styling */
 .icon {
-  font-size: 20px;
-  width:50px;
-  height:50px;
-  border-radius:50%;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #9BA8AB; /* subtle border for contrast */
 }
 
+/* Text styling */
 .text {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
+  color: #CCD0CF; /* Soft light text */
+}
+
+/* Credits card container */
+/* Credits card container - gamified style */
+/* Credits card container aligned like sidebar items */
+/* Credits container at top of sidebar */
+:root {
+  --color-midnight-navy: #06141b;
+  --color-deep-slate: #11212d;
+  --color-dark-steel: #253745;
+  --color-muted-blue: #4a5c6a;
+  --color-silver-mist: #9ba8ab;
+  --color-off-white-grey: #ccd0cf;
+}.credits-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at top,
+    var(--color-dark-steel),
+    var(--color-midnight-navy)
+  );
+  box-shadow:
+    0 0 10px var(--color-muted-blue),
+    0 0 25px rgba(74, 92, 106, 0.8),
+    inset 0 0 10px rgba(155, 168, 171, 0.25);
+  margin: 0 auto 30px auto;
+  position: relative;
+  animation: corePulse 2.6s ease-in-out infinite;
+}
+
+/* Catchy pulse animation */
+@keyframes corePulse {
+  0% {
+    box-shadow:
+      0 0 8px var(--color-muted-blue),
+      0 0 18px rgba(74, 92, 106, 0.6),
+      inset 0 0 8px rgba(155, 168, 171, 0.2);
+  }
+  100% {
+    box-shadow:
+      0 0 16px var(--color-muted-blue),
+      0 0 36px rgba(155, 168, 171, 0.7),
+      inset 0 0 12px rgba(155, 168, 171, 0.35);
+  }
+}
+
+/* Credits number */
+.credits-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-off-white-grey);
+  text-shadow:
+    0 0 6px var(--color-muted-blue),
+    0 0 12px rgba(155, 168, 171, 0.6);
+}
+
+/* Label */
+.credits-label {
+  font-size: 11px;
+  color: var(--color-silver-mist);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
 }

@@ -36,3 +36,13 @@ button {
 button:hover {
   background: #43a047;
 }
+.rating-box { /* your existing styles */ }
+.stars { /* your existing styles */ }
+.star { 
+  font-size: 30px; 
+  cursor: pointer; 
+  color: #555; 
+  transition: color 0.2s; 
+  display: inline-block; /* Ensures proper spacing */
+}
+.star.active { color: gold; }

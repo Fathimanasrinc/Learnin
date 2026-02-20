@@ -8,7 +8,6 @@
   --color-accent: #4a90e2;
 }
 
-/* Overlay */
 .task-overlay {
   position: fixed;
   inset: 0;
@@ -19,7 +18,6 @@
   z-index: 9999;
 }
 
-/* Card */
 .task-container {
   max-width: 460px;
   width: 92%;
@@ -35,7 +33,6 @@
   animation: popIn 0.25s ease;
 }
 
-/* Title */
 .task-heading {
   font-size: 22px;
   font-weight: 600;
@@ -44,7 +41,6 @@
   padding-bottom: 6px;
 }
 
-/* Fields */
 .task-field {
   margin-bottom: 15px;
 }
@@ -74,7 +70,6 @@
   overflow-y: auto;
 }
 
-/* Buttons */
 .accept-btn-task,
 .report-btn-task {
   width: 100%;
@@ -113,25 +108,6 @@
   color: var(--color-off-white-grey);
 }
 
-/* Rating stars */
-.stars-review-box {
-  display: flex;
-  gap: 8px;
-  font-size: 32px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.stars-review-box span {
-  cursor: pointer;
-  color: #555;
-}
-
-.active-review-box {
-  color: gold;
-}
-
-/* Animation */
 @keyframes popIn {
   from {
     opacity: 0;
@@ -141,26 +117,4 @@
     opacity: 1;
     transform: scale(1);
   }
-}
-.star-review {
-  font-size: 28px;
-  cursor: pointer;
-  color: #ccc; /* Gray hollow ☆ */
-  transition: color 0.2s ease;
-  display: inline-block;
-  margin: 0 2px;
-}
-
-.star-review.active-review-box {
-  color: #ffd700; /* Gold filled ★ */
-}
-
-.current-rating {
-  color: #aaa;
-  font-size: 14px;
-  margin: 8px 0;
-}
-
-.stars-review-box {
-  margin: 15px 0;
 }

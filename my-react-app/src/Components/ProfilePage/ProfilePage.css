@@ -1,27 +1,158 @@
-/* Main container (fits inside sidebar + navbar) */
-.profile-container {
+:root {
+  --color-midnight-navy: #06141b;
+  --color-deep-slate: #11212d;
+  --color-dark-steel: #253745;
+  --color-muted-blue: #4a5c6a;
+  --color-silver-mist: #9ba8ab;
+  --color-off-white-grey: #ccd0cf;
+}
+
+/* CONTAINER */
+.profile-container-profilepage {
   display: flex;
-  gap: 2rem;
-  padding: 2rem;
-  background-color: #1c1c1c; /* dark background */
-  color: #f5f5f5;
-  min-height: calc(100vh - 60px); /* adjust if navbar height differs */
-  overflow-y: auto;
-  font-family: 'Arial', sans-serif;
-  margin-left: 220px; /* updated to match your sidebar width */
+  gap: 40px;
+  padding: 40px;
+  margin-left: 130px;
+  margin-top: 50px;
+  max-width: 1000px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .profile-container {
-    margin-left: 220px; 
-    flex-direction: column;
-    padding: 1rem;
-  }
+/* LEFT */
+.left-section-profilepage {
+  width: 260px;
+  background: var(--color-silver-mist);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(6, 20, 27, 0.15);
+  text-align: center;
 }
 
-@media (max-width: 768px) {
-  .profile-container {
-    margin-left: 0; /* sidebar collapses or hides on mobile */
-  }
+.image-wrapper-profilepage {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color-muted-blue);
+}
+
+.profile-page-image-profilepage {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+/* CREDIT */
+.credit-circle-profilepage {
+  position: absolute;
+  top: -10px;        /* ⬅ moved from bottom */
+  right: -10px;       /* ⬅ moved to left */
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    var(--color-dark-steel),
+    var(--color-midnight-navy)
+  );
+  color: var(--color-off-white-grey);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(6, 20, 27, 0.5);
+  z-index: 2;
+}
+
+
+.credit-circle-profilepage span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.credit-circle-profilepage small {
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+/* USERNAME */
+.username-profilepage {
+  margin-top: 16px;
+  font-size: 20px;
+  color: var(--color-midnight-navy);
+}
+
+/* RATING */
+.rating-profilepage {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.star-profilepage {
+  width: 18px;
+  opacity: 0.8;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  filter: drop-shadow(0 0 2px rgba(6, 20, 27, 0.4));
+}
+
+.star-profilepage:hover {
+  transform: scale(1.15);
+  opacity: 1;
+}
+
+/* RIGHT */
+.right-section-profilepage {
+  flex: 1;
+  background: var(--color-off-white-grey);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(6, 20, 27, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top-content-profilepage h3 {
+  color: var(--color-dark-steel);
+  margin-bottom: 6px;
+}
+
+.bio-profilepage {
+  font-size: 14px;
+  color: var(--color-midnight-navy);
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+/* SKILLS */
+.skills-profilepage {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.skill-pill-profilepage {
+  background: var(--color-dark-steel);
+  color: var(--color-off-white-grey);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* BUTTON */
+.message-btn-profilepage {
+  margin-top: 25px;
+  padding: 10px 20px;
+  background: var(--color-midnight-navy);
+  border: none;
+  border-radius: 10px;
+  color: var(--color-off-white-grey);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.message-btn-profilepage:hover {
+  background: var(--color-deep-slate);
+  transform: translateY(-1px);
 }
